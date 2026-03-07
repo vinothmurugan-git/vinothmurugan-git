@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vinoth Murugan — DevOps Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #080510;
+  --bg2:     #0d0a1a;
+  --bg3:     #130e24;
+  --gold:    #c9a84c;
+  --gold2:   #e8c97a;
+  --gold3:   #f5e4b0;
+  --purple:  #7b35d8;
+  --purple2: #9d5fea;
+  --cream:   #ede0cc;
+  --muted:   #7a6e88;
+  --border:  rgba(201,168,76,0.18);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--cream);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+
+/* ── grid bg ── */
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);
+  background-size:64px 64px;pointer-events:none;z-index:0;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:22px 64px;
+  background:rgba(8,5,16,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-size:1.5rem;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:0.02em;
+}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{
+  color:var(--muted);text-decoration:none;
+  font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;
+  font-weight:500;transition:color 0.3s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-5px;left:0;
+  width:0;height:1px;background:var(--gold);transition:width 0.35s;
+}
+.nav-links a:hover{color:var(--gold2);}
+.nav-links a:hover::after{width:100%;}
+
+/* ── HERO (Magazine) ── */
+#hero{
+  min-height:100vh;position:relative;z-index:1;
+  display:grid;grid-template-columns:1fr 420px;
+  padding:130px 64px 80px;gap:60px;align-items:center;
+  overflow:hidden;
+}
+
+.hero-glow{
+  position:absolute;pointer-events:none;
+  border-radius:50%;filter:blur(120px);
+}
+.glow1{width:600px;height:600px;background:rgba(123,53,216,0.12);top:-100px;right:-100px;}
+.glow2{width:400px;height:400px;background:rgba(201,168,76,0.08);bottom:0;left:100px;}
+
+.hero-left{position:relative;z-index:2;}
+
+.hero-issue{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'DM Mono',monospace;
+  font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:32px;
+  padding:7px 16px;
+  border:1px solid var(--border);
+}
+.hero-issue::before{
+  content:'';width:24px;height:1px;background:var(--gold);
+}
+
+.hero-headline{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(4rem,6.5vw,8rem);
+  font-weight:900;line-height:0.88;
+  letter-spacing:-0.03em;
+  margin-bottom:8px;
+}
+.hero-headline .line1{color:var(--cream);}
+.hero-headline .line2{
+  display:block;
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold2) 50%,var(--purple2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-headline .line3{
+  display:block;
+  font-style:italic;
+  color:var(--purple2);
+  font-size:0.55em;
+  letter-spacing:0.01em;
+  margin-top:12px;
+}
+
+.hero-divider{
+  width:80px;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--purple));
+  margin:32px 0;
+}
+
+.hero-desc{
+  font-size:1rem;line-height:1.8;
+  color:var(--muted);max-width:560px;
+  margin-bottom:44px;
+  font-weight:300;
+}
+
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;}
+
+.btn-gold{
+  padding:14px 36px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:var(--bg);
+  font-family:'DM Sans',sans-serif;
+  font-size:0.8rem;font-weight:600;
+  letter-spacing:0.12em;text-transform:uppercase;
+  border:none;cursor:pointer;text-decoration:none;
+  display:inline-block;transition:all 0.3s;
+  position:relative;overflow:hidden;
+}
+.btn-gold::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--gold2),var(--gold3));
+  opacity:0;transition:opacity 0.3s;
+}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,0.35);}
+.btn-gold:hover::after{opacity:1;}
+.btn-gold span{position:relative;z-index:1;}
+
+.btn-ghost{
+  padding:13px 36px;
+  background:transparent;
+  color:var(--gold);
+  font-family:'DM Sans',sans-serif;
+  font-size:0.8rem;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  border:1px solid var(--border);
+  cursor:pointer;text-decoration:none;display:inline-block;
+  transition:all 0.3s;
+}
+.btn-ghost:hover{border-color:var(--gold);background:rgba(201,168,76,0.06);transform:translateY(-2px);}
+
+/* Hero right card */
+.hero-right{position:relative;z-index:2;}
+
+.profile-card{
+  background:var(--bg3);
+  border:1px solid var(--border);
+  padding:40px 36px;
+  position:relative;
+}
+.profile-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--purple),var(--gold),var(--purple2));
+}
+.profile-avatar{
+  width:88px;height:88px;
+  background:linear-gradient(135deg,var(--purple),var(--purple2));
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:2rem;font-weight:900;color:var(--cream);
+  margin-bottom:20px;
+  border:3px solid rgba(201,168,76,0.3);
+}
+.profile-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.3rem;font-weight:700;
+  color:var(--cream);margin-bottom:4px;
+}
+.profile-role{font-size:0.78rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:24px;}
+
+.profile-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);margin-bottom:28px;}
+.pstat{background:var(--bg3);padding:16px 12px;text-align:center;}
+.pstat-num{
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;font-weight:700;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.pstat-label{font-size:0.6rem;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;margin-top:2px;}
+
+.profile-info{display:flex;flex-direction:column;gap:12px;}
+.pinfo-row{display:flex;align-items:center;gap:10px;font-size:0.8rem;}
+.pinfo-icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:rgba(201,168,76,0.08);border:1px solid var(--border);font-size:0.85rem;flex-shrink:0;}
+.pinfo-text{color:var(--muted);}
+.pinfo-text strong{color:var(--cream);font-weight:500;}
+
+/* ── SECTION COMMON ── */
+section{position:relative;z-index:1;}
+.section-inner{max-width:1160px;margin:0 auto;padding:100px 64px;}
+
+.mag-label{
+  display:flex;align-items:center;gap:14px;
+  font-family:'DM Mono',monospace;
+  font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:12px;
+}
+.mag-label::before{content:'';width:32px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);}
+.mag-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,0.15),transparent);}
+
+.mag-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,4vw,3.5rem);
+  font-weight:900;margin-bottom:60px;
+  letter-spacing:-0.02em;line-height:1.1;
+}
+.mag-title em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--gold),var(--purple2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+/* ── ABOUT ── */
+#about{background:var(--bg2);}
+
+.about-layout{display:grid;grid-template-columns:1.1fr 0.9fr;gap:80px;align-items:start;}
+
+.about-body p{
+  font-size:0.95rem;line-height:1.95;
+  color:var(--muted);margin-bottom:22px;font-weight:300;
+}
+.about-body p strong{color:var(--cream);font-weight:500;}
+
+.about-pull{
+  background:var(--bg3);
+  border-left:3px solid var(--gold);
+  padding:24px 28px;
+  margin-top:36px;
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:1.15rem;line-height:1.7;
+  color:var(--gold3);
+}
+
+.about-aside{display:flex;flex-direction:column;gap:20px;margin-top:8px;}
+
+.aside-card{
+  background:var(--bg3);border:1px solid var(--border);
+  padding:24px 28px;position:relative;
+  transition:border-color 0.3s,transform 0.3s;
+}
+.aside-card:hover{border-color:rgba(201,168,76,0.4);transform:translateX(4px);}
+.aside-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:linear-gradient(to bottom,var(--gold),var(--purple));
+  opacity:0;transition:opacity 0.3s;
+}
+.aside-card:hover::before{opacity:1;}
+.aside-card-label{
+  font-family:'DM Mono',monospace;
+  font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:7px;
+}
+.aside-card-val{font-size:0.9rem;color:var(--cream);font-weight:400;}
+
+/* ── SKILLS ── */
+#skills{background:var(--bg);}
+
+.skills-wrap{display:flex;flex-direction:column;gap:48px;}
+
+.skill-group-title{
+  font-family:'Playfair Display',serif;
+  font-size:1rem;font-style:italic;
+  color:var(--gold2);margin-bottom:18px;
+  display:flex;align-items:center;gap:12px;
+}
+.skill-group-title::after{content:'';flex:1;height:1px;background:var(--border);}
+
+.skill-tags{display:flex;flex-wrap:wrap;gap:10px;}
+
+.stag{
+  padding:9px 18px;
+  background:var(--bg3);
+  border:1px solid var(--border);
+  font-size:0.8rem;color:var(--muted);
+  font-family:'DM Mono',monospace;
+  letter-spacing:0.04em;
+  transition:all 0.3s;position:relative;overflow:hidden;
+}
+.stag::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(123,53,216,0.12),rgba(201,168,76,0.08));
+  opacity:0;transition:opacity 0.3s;
+}
+.stag:hover{border-color:var(--gold);color:var(--gold2);transform:translateY(-2px);}
+.stag:hover::before{opacity:1;}
+
+/* ── EXPERIENCE ── */
+#experience{background:var(--bg2);}
+
+.exp-layout{display:grid;grid-template-columns:220px 1fr;gap:0;}
+
+.exp-nav{border-right:1px solid var(--border);padding-right:40px;}
+.exp-nav-item{
+  padding:16px 0;cursor:pointer;
+  border-bottom:1px solid rgba(201,168,76,0.07);
+  transition:all 0.3s;
+}
+.exp-nav-item.active .enav-role{color:var(--gold2);}
+.exp-nav-item.active .enav-line{width:24px;background:var(--gold);}
+.enav-period{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;color:var(--purple2);margin-bottom:5px;}
+.enav-role{font-size:0.85rem;font-weight:500;color:var(--muted);transition:color 0.3s;}
+.enav-line{width:0;height:1px;background:transparent;margin-top:8px;transition:all 0.4s;}
+.exp-nav-item:hover .enav-role{color:var(--cream);}
+
+.exp-panels{padding-left:56px;}
+.exp-panel{display:none;}
+.exp-panel.active{display:block;animation:panelIn 0.4s ease;}
+
+@keyframes panelIn{from{opacity:0;transform:translateX(12px);}to{opacity:1;transform:translateX(0);}}
+
+.ep-header{margin-bottom:28px;}
+.ep-role{
+  font-family:'Playfair Display',serif;
+  font-size:1.8rem;font-weight:700;
+  color:var(--cream);margin-bottom:6px;
+}
+.ep-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.ep-company{font-size:0.85rem;color:var(--gold);font-weight:500;}
+.ep-period{
+  font-family:'DM Mono',monospace;
+  font-size:0.7rem;letter-spacing:0.1em;
+  color:var(--purple2);
+  padding:3px 10px;border:1px solid var(--borderp);
+}
+
+.ep-points{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.ep-points li{
+  font-size:0.88rem;line-height:1.8;color:var(--muted);
+  padding-left:22px;position:relative;font-weight:300;
+}
+.ep-points li::before{
+  content:'◆';position:absolute;left:0;top:3px;
+  font-size:0.45rem;color:var(--gold);
+}
+.ep-points li strong{color:var(--gold3);font-weight:500;}
+
+/* ── EDUCATION ── */
+#education{background:var(--bg);}
+
+.edu-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:56px;}
+
+.edu-card{
+  background:var(--bg3);border:1px solid var(--border);
+  padding:36px;position:relative;overflow:hidden;
+  transition:all 0.3s;
+}
+.edu-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--purple),var(--gold));
+  transform:scaleX(0);transform-origin:left;transition:transform 0.4s;
+}
+.edu-card:hover::after{transform:scaleX(1);}
+.edu-card:hover{border-color:rgba(201,168,76,0.3);transform:translateY(-3px);}
+
+.edu-year{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.15em;color:var(--purple2);margin-bottom:12px;}
+.edu-degree{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:6px;color:var(--cream);}
+.edu-school{font-size:0.8rem;color:var(--muted);margin-bottom:12px;}
+.edu-grade{
+  display:inline-block;
+  font-family:'DM Mono',monospace;font-size:0.72rem;
+  padding:4px 12px;
+  background:rgba(201,168,76,0.1);
+  border:1px solid rgba(201,168,76,0.25);
+  color:var(--gold2);letter-spacing:0.08em;
+}
+
+.certs-title{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:1.1rem;color:var(--gold2);
+  margin-bottom:20px;
+}
+.certs-grid{display:flex;flex-wrap:wrap;gap:12px;}
+.cert-pill{
+  padding:10px 20px;
+  background:var(--bg3);border:1px solid var(--border);
+  font-size:0.8rem;color:var(--muted);
+  transition:all 0.3s;display:flex;align-items:center;gap:8px;
+}
+.cert-pill:hover{border-color:var(--purple2);color:var(--cream);}
+.cert-dot{width:6px;height:6px;background:var(--purple2);border-radius:50%;flex-shrink:0;}
+
+/* ── CONTACT ── */
+#contact{background:var(--bg2);}
+
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+
+.contact-left{}
+.contact-tagline{
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;font-style:italic;
+  color:var(--gold3);line-height:1.5;
+  margin-bottom:36px;
+}
+
+.clinks{display:flex;flex-direction:column;gap:14px;}
+.clink{
+  display:flex;align-items:center;gap:16px;
+  text-decoration:none;color:var(--cream);
+  padding:16px 20px;
+  background:var(--bg3);border:1px solid var(--border);
+  transition:all 0.3s;
+}
+.clink:hover{border-color:var(--gold);background:rgba(201,168,76,0.05);transform:translateX(5px);}
+.clink-icon{
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,rgba(123,53,216,0.3),rgba(201,168,76,0.1));
+  border:1px solid var(--border);font-size:1rem;flex-shrink:0;
+}
+.clink-text{font-size:0.85rem;font-weight:400;}
+
+.contact-form{display:flex;flex-direction:column;gap:20px;}
+.fgroup{display:flex;flex-direction:column;gap:7px;}
+.fgroup label{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);}
+.fgroup input,.fgroup textarea{
+  background:var(--bg3);border:1px solid var(--border);
+  color:var(--cream);padding:14px 18px;
+  font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:300;
+  outline:none;resize:none;transition:border-color 0.3s;
+}
+.fgroup input:focus,.fgroup textarea:focus{border-color:var(--gold);}
+.fgroup textarea{height:130px;}
+
+/* ── FOOTER ── */
+footer{
+  position:relative;z-index:1;
+  background:var(--bg);
+  border-top:1px solid var(--border);
+  padding:36px 64px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+}
+.footer-brand{
+  font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.footer-copy{font-size:0.72rem;color:var(--muted);}
+.footer-copy span{color:var(--gold);}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-24px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:16px 24px;}
+  .nav-links{display:none;}
+  #hero{grid-template-columns:1fr;padding:100px 24px 60px;}
+  .hero-right{display:none;}
+  .section-inner{padding:64px 24px;}
+  .about-layout,.contact-layout,.edu-layout{grid-template-columns:1fr;gap:36px;}
+  .exp-layout{grid-template-columns:1fr;}
+  .exp-nav{border-right:none;border-bottom:1px solid var(--border);padding:0 0 24px;margin-bottom:32px;display:flex;flex-wrap:wrap;gap:8px;}
+  .exp-nav-item{border-bottom:none;padding:8px 14px;border:1px solid var(--border);}
+  .exp-panels{padding-left:0;}
+  footer{padding:24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">VM.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow glow1"></div>
+  <div class="hero-glow glow2"></div>
+
+  <div class="hero-left">
+    <div class="hero-issue">DevOps Engineer · Bengaluru, India</div>
+    <h1 class="hero-headline">
+      <span class="line1">Vinoth</span>
+      <span class="line2">Murugan</span>
+      <span class="line3">Building infrastructure that never sleeps.</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-desc">
+      Automating CI/CD pipelines, orchestrating containers, and securing cloud environments at scale. Specialised in AWS, Kubernetes, Terraform, Kong API Gateway and Wazuh SIEM — turning complex infrastructure into elegant, self-healing systems.
+    </p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-gold"><span>Get In Touch</span></a>
+      <a href="#experience" class="btn-ghost">View Experience</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="profile-card">
+      <div class="profile-avatar">VM</div>
+      <div class="profile-name">Vinoth Murugan</div>
+      <div class="profile-role">DevOps Engineer</div>
+      <div class="profile-stats">
+        <div class="pstat"><div class="pstat-num">2+</div><div class="pstat-label">Yrs DevOps</div></div>
+        <div class="pstat"><div class="pstat-num">75%</div><div class="pstat-label">Deploy ↓</div></div>
+        <div class="pstat"><div class="pstat-num">90%</div><div class="pstat-label">Auto Deploy</div></div>
+      </div>
+      <div class="profile-info">
+        <div class="pinfo-row"><div class="pinfo-icon">📍</div><div class="pinfo-text">Bengaluru, India</div></div>
+        <div class="pinfo-row"><div class="pinfo-icon">📧</div><div class="pinfo-text">vinothmurugan97@gmail.com</div></div>
+        <div class="pinfo-row"><div class="pinfo-icon">📞</div><div class="pinfo-text">+91 76391 92020</div></div>
+        <div class="pinfo-row"><div class="pinfo-icon">🔗</div><div class="pinfo-text">linkedin.com/in/vinothmurugan97</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="mag-label">Who I Am</div>
+    <h2 class="mag-title">About <em>Me</em></h2>
+    <div class="about-layout">
+      <div class="about-body reveal-left">
+        <p>I'm <strong>Vinoth Murugan</strong>, a DevOps Engineer at <strong>Rugas Technologies Pvt Ltd, Bengaluru</strong>. I specialise in bridging development and operations — automating workflows, hardening cloud environments, and ensuring systems remain available, secure, and scalable.</p>
+        <p>My core focus spans <strong>CI/CD automation with Bitbucket Pipelines & Jenkins</strong>, container orchestration on <strong>AWS ECS and Kubernetes</strong>, API security via <strong>Kong Gateway</strong>, centralized logging with <strong>ELK Stack</strong>, and security monitoring via <strong>Wazuh SIEM</strong>.</p>
+        <p>I've also delivered solutions in niche domains: <strong>PACS medical imaging</strong> (DCM4CHEE on Docker Swarm), <strong>live low-latency streaming</strong> (MediaMTX + FFmpeg), and <strong>mobile CI/CD</strong> for iOS & Android via Fastlane. I believe excellent DevOps is invisible — it just makes everything work.</p>
+        <div class="about-pull">
+          "The best infrastructure is the kind your developers never have to think about."
+        </div>
+      </div>
+      <div class="about-aside reveal">
+        <div class="aside-card">
+          <div class="aside-card-label">Current Position</div>
+          <div class="aside-card-val">DevOps Engineer @ Rugas Technologies</div>
+        </div>
+        <div class="aside-card">
+          <div class="aside-card-label">Location</div>
+          <div class="aside-card-val">Bengaluru, India · Open to Remote</div>
+        </div>
+        <div class="aside-card">
+          <div class="aside-card-label">Specialisation</div>
+          <div class="aside-card-val">Cloud Infrastructure, CI/CD, Container Orchestration</div>
+        </div>
+        <div class="aside-card">
+          <div class="aside-card-label">Email</div>
+          <div class="aside-card-val">vinothmurugan97@gmail.com</div>
+        </div>
+        <div class="aside-card">
+          <div class="aside-card-label">Phone</div>
+          <div class="aside-card-val">+91 76391 92020</div>
+        </div>
+        <div class="aside-card">
+          <div class="aside-card-label">Languages</div>
+          <div class="aside-card-val">Tamil, English</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="mag-label">Tech Stack</div>
+    <h2 class="mag-title">Skills &amp; <em>Tools</em></h2>
+    <div class="skills-wrap reveal">
+      <div>
+        <div class="skill-group-title">Containerisation &amp; Orchestration</div>
+        <div class="skill-tags">
+          <div class="stag">Docker</div><div class="stag">Docker Compose</div><div class="stag">Docker Swarm</div>
+          <div class="stag">Kubernetes</div><div class="stag">AWS ECS Fargate</div><div class="stag">AWS ECS EC2</div><div class="stag">Helm</div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-title">Cloud Platforms &amp; Services</div>
+        <div class="skill-tags">
+          <div class="stag">AWS EC2</div><div class="stag">AWS ECS / ECR</div><div class="stag">AWS S3</div>
+          <div class="stag">AWS IAM</div><div class="stag">AWS CloudFront</div><div class="stag">AWS CloudWatch</div>
+          <div class="stag">GCP Artifact Registry</div><div class="stag">GCP Buckets</div>
+          <div class="stag">DigitalOcean</div><div class="stag">Cloudflare</div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-title">CI/CD &amp; Automation</div>
+        <div class="skill-tags">
+          <div class="stag">Bitbucket Pipelines</div><div class="stag">Jenkins</div>
+          <div class="stag">Fastlane (iOS/Android)</div><div class="stag">Firebase Distribution</div>
+          <div class="stag">n8n</div><div class="stag">Git / Bitbucket</div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-title">Infrastructure as Code &amp; Scripting</div>
+        <div class="skill-tags">
+          <div class="stag">Terraform</div><div class="stag">Ansible</div>
+          <div class="stag">Bash / Shell</div><div class="stag">Python</div><div class="stag">Ruby (Fastlane)</div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-title">Security &amp; Observability</div>
+        <div class="skill-tags">
+          <div class="stag">Kong API Gateway</div><div class="stag">Keycloak (RBAC)</div>
+          <div class="stag">Wazuh SIEM</div><div class="stag">Trivy</div>
+          <div class="stag">ELK Stack</div><div class="stag">Prometheus</div>
+          <div class="stag">Grafana</div><div class="stag">AWS CloudWatch</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="mag-label">Career Path</div>
+    <h2 class="mag-title">Work <em>Experience</em></h2>
+    <div class="exp-layout reveal">
+      <div class="exp-nav">
+        <div class="exp-nav-item active" onclick="switchExp(0,this)">
+          <div class="enav-period">2024 — Present</div>
+          <div class="enav-role">DevOps Engineer</div>
+          <div class="enav-line"></div>
+        </div>
+        <div class="exp-nav-item" onclick="switchExp(1,this)">
+          <div class="enav-period">2023 — 2024</div>
+          <div class="enav-role">Test Automation Engineer</div>
+          <div class="enav-line"></div>
+        </div>
+      </div>
+      <div class="exp-panels">
+
+        <div class="exp-panel active" id="ep0">
+          <div class="ep-header">
+            <div class="ep-role">DevOps Engineer</div>
+            <div class="ep-meta">
+              <span class="ep-company">Rugas Technologies Pvt Ltd · Bengaluru</span>
+              <span class="ep-period">03/2024 — Present</span>
+            </div>
+          </div>
+          <ul class="ep-points">
+            <li>Configured Bitbucket CI/CD pipelines, <strong>reducing deployment times by 75%</strong> with full automation.</li>
+            <li>Deployed containerised applications on <strong>AWS ECS (Fargate & EC2)</strong> for scalable, high-availability delivery.</li>
+            <li>Provisioned <strong>Kubernetes clusters on DigitalOcean using Terraform</strong>, automating scaling and microservice pipelines.</li>
+            <li>Configured <strong>AWS CloudFront CDN</strong> to reduce global latency and improve application performance.</li>
+            <li>Deployed <strong>DCM4CHEE PACS medical imaging</strong> on a 3-node Docker Swarm cluster for healthcare high availability.</li>
+            <li>Implemented <strong>Kong API Gateway</strong> with rate-limiting, DDoS protection, SSL/TLS, OWASP headers, and monitoring.</li>
+            <li>Deployed <strong>Keycloak</strong> for role-based access control and centralized user management across applications.</li>
+            <li>Deployed <strong>Wazuh SIEM</strong>; automated agent rollout with Ansible — <strong>cutting setup time by 90%</strong>.</li>
+            <li>Integrated <strong>Trivy</strong> into Bitbucket pipelines for container image and dependency vulnerability scanning.</li>
+            <li>Migrated domains to <strong>Cloudflare</strong> with DNS hardening, WAF rules, bot filtering, and SSL/TLS enforcement.</li>
+            <li>Automated iOS & Android builds with <strong>Fastlane + Jenkins</strong>, auto-distributing via Firebase.</li>
+            <li>Implemented <strong>ELK Stack</strong> for centralised log monitoring and rapid incident resolution.</li>
+            <li>Built <strong>n8n–Bitbucket LLM automation</strong> to analyse release diffs and surface precise QA testing focus areas.</li>
+            <li>Deployed <strong>Raspberry Pi live streaming</strong> via MediaMTX + FFmpeg for low-latency medical imaging.</li>
+            <li>Built architecture-independent <strong>Debian packages (.deb)</strong> with systemd for amd64 and ARM.</li>
+          </ul>
+        </div>
+
+        <div class="exp-panel" id="ep1">
+          <div class="ep-header">
+            <div class="ep-role">Test Automation Engineer</div>
+            <div class="ep-meta">
+              <span class="ep-company">Rugas Technologies Pvt Ltd · Bengaluru</span>
+              <span class="ep-period">03/2023 — 02/2024</span>
+            </div>
+          </div>
+          <ul class="ep-points">
+            <li>Developed automated test scripts with <strong>Postman API & Nightwatch.js E2E</strong>, <strong>increasing efficiency by 50%</strong>.</li>
+            <li>Built <strong>CI/CD pipelines on Jenkins</strong> for automated testing with daily HTML reports for bug tracking.</li>
+            <li>Integrated <strong>Newman into CI/CD pipelines</strong> for automated API performance monitoring.</li>
+            <li>Collaborated cross-functionally to define test requirements and create comprehensive plans and reports.</li>
+            <li>Contributed to <strong>Agile ceremonies</strong> — stand-ups, sprint planning, and retrospectives.</li>
+            <li>Mentored new team members on manual and automation testing best practices.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="mag-label">Academic Background</div>
+    <h2 class="mag-title">Education &amp; <em>Courses</em></h2>
+    <div class="edu-layout reveal">
+      <div class="edu-card">
+        <div class="edu-year">2015 — 2019</div>
+        <div class="edu-degree">B.Tech — Petrochemical Engineering</div>
+        <div class="edu-school">Anna University (BIT Campus) · Tiruchirappalli</div>
+        <div class="edu-grade">CGPA: 7.2</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-year">2013 — 2015</div>
+        <div class="edu-degree">Higher Secondary Education</div>
+        <div class="edu-school">G.K Matriculation Higher Secondary School</div>
+        <div class="edu-grade">Score: 90%</div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="certs-title">Certifications &amp; Courses</div>
+      <div class="certs-grid">
+        <div class="cert-pill"><div class="cert-dot"></div>AWS Cloud Practitioner</div>
+        <div class="cert-pill"><div class="cert-dot"></div>Postman — REST API Testing</div>
+        <div class="cert-pill"><div class="cert-dot"></div>Test Automation — Nightwatch.js</div>
+        <div class="cert-pill"><div class="cert-dot"></div>Mobile Automation — Appium 2.0 &amp; WebdriverIO</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="mag-label">Let's Connect</div>
+    <h2 class="mag-title">Get In <em>Touch</em></h2>
+    <div class="contact-layout">
+      <div class="contact-left reveal-left">
+        <p class="contact-tagline">"Open to DevOps roles, cloud projects, and infrastructure consulting."</p>
+        <div class="clinks">
+          <a href="mailto:vinothmurugan97@gmail.com" class="clink">
+            <div class="clink-icon">📧</div>
+            <div class="clink-text">vinothmurugan97@gmail.com</div>
+          </a>
+          <a href="tel:+917639192020" class="clink">
+            <div class="clink-icon">📞</div>
+            <div class="clink-text">+91 76391 92020</div>
+          </a>
+          <a href="https://www.linkedin.com/in/vinothmurugan97" class="clink" target="_blank">
+            <div class="clink-icon">🔗</div>
+            <div class="clink-text">linkedin.com/in/vinothmurugan97</div>
+          </a>
+        </div>
+      </div>
+      <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+        <div class="fgroup"><label>Your Name</label><input type="text" placeholder="Jane Doe"/></div>
+        <div class="fgroup"><label>Email Address</label><input type="email" placeholder="jane@example.com"/></div>
+        <div class="fgroup"><label>Message</label><textarea placeholder="Tell me about your project or role..."></textarea></div>
+        <button type="submit" class="btn-gold" style="width:fit-content"><span>Send Message →</span></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Vinoth Murugan</div>
+  <div class="footer-copy">© 2025 <span>Vinoth Murugan</span>. All rights reserved.</div>
+  <div class="footer-copy" style="font-size:0.65rem">Built with precision · Deployed with confidence</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e,i) => {
+      if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'), i*100);
+    });
+  },{threshold:0.08});
+  document.querySelectorAll('.reveal,.reveal-left').forEach(el=>observer.observe(el));
+
+  // Experience tab switch
+  function switchExp(idx, el) {
+    document.querySelectorAll('.exp-nav-item').forEach(i=>i.classList.remove('active'));
+    document.querySelectorAll('.exp-panel').forEach(p=>p.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('ep'+idx).classList.add('active');
+  }
+
+  // Nav active highlight
+  window.addEventListener('scroll',()=>{
+    let cur='';
+    document.querySelectorAll('section[id]').forEach(s=>{
+      if(window.scrollY>=s.offsetTop-110) cur=s.id;
+    });
+    document.querySelectorAll('.nav-links a').forEach(a=>{
+      a.style.color = a.getAttribute('href')==='#'+cur ? 'var(--gold2)' : '';
+    });
+  });
+
+  // Contact form
+  function handleSubmit(e){
+    e.preventDefault();
+    const btn=e.target.querySelector('button');
+    btn.querySelector('span').textContent='✓ Sent!';
+    btn.style.background='linear-gradient(135deg,#5a9a3a,#7bbf55)';
+    setTimeout(()=>{btn.querySelector('span').textContent='Send Message →';btn.style.background='';e.target.reset();},3000);
+  }
+</script>
+</body>
+</html>
