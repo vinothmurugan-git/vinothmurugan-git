@@ -120,15 +120,6 @@ I don't just build pipelines — I build systems that recover themselves, deploy
 
 ---
 
-## 📈 GitHub Stats
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=vinothmurugan-git&show_icons=true&theme=tokyonight&hide_border=true" width="48%" />
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=vinothmurugan-git&theme=tokyonight&hide_border=true" width="48%" />
-</p>
-
----
-
 ## 🎓 Education & Certifications
 
 - 🎓 **B.Tech – Petrochemical Engineering** | Anna University – BIT Campus, Tiruchirappalli *(2015–2019)*
